@@ -2,7 +2,9 @@ function handleInput(){
     var self = this;
     const target = document.getElementById('targetInp');
     target.addEventListener("focusin",self.showSearch);
-    target.addEventListener("focusout",self.hideSearch);
+    target.addEventListener("focusout",() => {
+        setTimeout(function() {self.hideSearch()},300);
+    });
     target.addEventListener("input",self.inputChanged);
     filteredArrays = predefinedCountry;
 };
@@ -18,6 +20,14 @@ function showSearch(){
         fullHtml += ('</ul></div>');
         target.append(fullHtml);
     }
+    $(".kebab").on("click","li",function(){
+        self.insertIntoInput($(this).text());
+    })
+}
+
+function insertIntoInput(item){
+    console.log('inserting : ',item);
+    $('.searchBar').val(item);
 }
 
 function inputChanged(){

@@ -44,6 +44,7 @@ function inputChanged(){
                     insertItem = true;
                 }else{
                     insertItem = false;
+                    break;
                 }
             }
             if(insertItem){
@@ -75,6 +76,8 @@ function makeBoldText(){
 //this will be read via rest calls.... and updated after input changed...
 //make this to loverCase always even that the calls return camelCase
 var predefinedCountry = [
+    "Pepa",
+    "Pen",
     "Czechia",
     "United States of America",
     "Canada",

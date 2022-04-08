@@ -4,35 +4,58 @@ function handleInput(){
     target.addEventListener("focusin",self.showSearch);
     target.addEventListener("focusout",self.hideSearch);
     target.addEventListener("input",self.inputChanged);
+    filteredArrays = predefinedCountry;
 };
 
 function showSearch(){
-    let target = document.getElementById('targetInp');
+    const target = $('.kebab');
     if(target != undefined){
-        target.innerHTML += '<div class="searchResults"><ul>';
-        predefinedCountry.forEach(item =>{
-            target.innerHTML +=('<li>' + item + '</li>');
-        });
-        target.innerHTML +=('</ul></div>');
-        console.dir(target);
+        let fullHtml = '';
+        fullHtml += ('afterend','<div class="searchResults"><ul>');
+        filteredArrays.forEach(item =>{
+                fullHtml +=('<li>' + item + '</li>');
+        });    
+        fullHtml += ('</ul></div>');
+        target.append(fullHtml);
     }
 }
 
 function inputChanged(){
-    const target = document.getElementById('targetInp');
-    console.log('input changed event listener fired..');
-    console.log(predefinedCountry);
+    const targetVal = $('.searchBar').val();
+    let targetItem = predefinedCountry;
+    let result = new Array();
+    if(targetVal === ''){
+        result = targetItem;
+    }else{
+        targetItem.forEach(item =>{
+            let insertItem = false;
+            for(let i = 0; i < targetVal.length; i++){
+                if(targetVal[i].toString().toLowerCase() === item[i].toString().toLowerCase()){
+                    insertItem = true;
+                }else{
+                    insertItem = false;
+                }
+            }
+            if(insertItem){
+                result.push(item);
+            }
+            /*if(item.toLowerCase().indexOf(targetVal.toLowerCase()) >= 0){
+                result.push(item);
+            }*/
+        });
+    }
+    storeNewSearchResult(result);
+    hideSearch();
+    showSearch();
 };
 
 function hideSearch(){
-    console.log('hide search, event fired');
+    $('.searchResults').remove();
 
 }
 
 function storeNewSearchResult(inputArray){
-    if(typeof(inputArray) === Array){
-        predefinedCountry = inputArray;    
-    }
+        filteredArrays = inputArray;
 };
 
 function makeBoldText(){
@@ -51,7 +74,10 @@ var predefinedCountry = [
     "Pes",
     "Kočka",
     "Kolo",
-    "Penis",
+    "Pero",
     "Sýkorka",
     "UTF-8"
+];
+
+var filteredArrays = [
 ];

@@ -1,10 +1,22 @@
 .searchBar{
     border: 1px solid black;
-    border-radius: 25%;
+    width: 100%;
 }
 
 .searchResults{
     position: relative;
     width: 100%;
+    height: auto;
+    background-color: white;
+    color: black;
+}
+
+.searchResults li:hover{
+    background-color: black;
+    color: white;
+}
+
+.kebab{
+    width : 300px;
     height: auto;
 }
